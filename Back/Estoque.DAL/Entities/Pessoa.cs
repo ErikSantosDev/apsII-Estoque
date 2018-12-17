@@ -1,16 +1,22 @@
-﻿namespace Estoque.DAL.Entities
+﻿using Common.Attributes;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace Estoque.DAL.Entities
 {
     public class Pessoa: Entity
     {
+        [TextField]
         public string Nome { get; set; }
+        public long EnderecoId { get; set; }
 
-        public string Celular { get; set; }
-
-        public long? CidadeId { get; set; }
-
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        public virtual Cidade Cidade { get; set; }
+        public Endereco Endereco { get; set; }
+        public virtual ICollection<Telefone>Telefones { get; set; }
 
+        public virtual PessoaFisica PessoaFisica { get; set; }
+        public virtual PessoaJuridica PessoaJuridica { get; set; }
     }
 }
